@@ -89,6 +89,7 @@ function getVoices() {
 }
 
 // Voices changed
+// "voiceschanged" event is not compatible with Safari iOS
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
 // Toggle text box
