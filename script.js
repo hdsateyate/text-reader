@@ -76,7 +76,7 @@ function createBoxes(item) {
 // Store voices
 let voices = [];
 
-function getVoices() {
+function createVoicesList() {
 	voices = speechSynthesis.getVoices();
 	
 	console.log(voices);
@@ -92,9 +92,11 @@ function getVoices() {
 	});
 }
 
+console.log(speechSynthesis);
+
 // Voices changed
 // "voiceschanged" event is not compatible with Safari iOS
-// speechSynthesis.addEventListener('voiceschanged', getVoices);
+speechSynthesis.addEventListener('voiceschanged', createVoicesList);
 
 // Toggle text box
 toggleBtn.addEventListener('click', () => document.getElementById('text-box').classList.toggle('show'));
@@ -103,4 +105,4 @@ toggleBtn.addEventListener('click', () => document.getElementById('text-box').cl
 closeBtn.addEventListener('click', () => document.getElementById('text-box').classList.remove('show'));
 
 // Init voices
-getVoices();
+createVoicesList();
