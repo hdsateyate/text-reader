@@ -79,7 +79,11 @@ let voices = [];
 function getVoices() {
 	voices = speechSynthesis.getVoices();
 	
+	console.log(voices);
+	
 	voices.forEach(voice => {
+		console.log(voice);
+		
 		const option = createElement('option');
 
 		option.value = voice.name;
@@ -90,7 +94,7 @@ function getVoices() {
 
 // Voices changed
 // "voiceschanged" event is not compatible with Safari iOS
-speechSynthesis.addEventListener('voiceschanged', getVoices);
+// speechSynthesis.addEventListener('voiceschanged', getVoices);
 
 // Toggle text box
 toggleBtn.addEventListener('click', () => document.getElementById('text-box').classList.toggle('show'));
