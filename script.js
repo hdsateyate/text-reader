@@ -68,7 +68,14 @@ function createBoxes(item) {
       <img src="${image}" alt="${text}" />
       <p class="info">${text}</p>`;
 
-   // @todo - speak event
+   box.addEventListener('click', () => {
+      setTextMessage(text);
+      speakText();
+
+      // Add active effect
+      box.classList.add('active');
+      setTimeout(() => box.classList.remove('active'), 800);
+   });
 
    main.appendChild(box);
 }
@@ -77,17 +84,9 @@ function createBoxes(item) {
 let voices = [];
 
 function createVoicesList() {
-	console.log(voices);
-
 	voices = speechSynthesis.getVoices();
 
-	let consLog = setTimeout(console.log(voices), 6000);
-
-   consLog = setTimeout(console.log(voices), 10000);
-	
 	voices.forEach(voice => {
-		// console.log(voice);
-		
 		const option = document.createElement('option');
 
 		option.value = voice.name;
@@ -95,6 +94,19 @@ function createVoicesList() {
 		voicesSelect.appendChild(option);
 	});
 }
+
+// Set the text for the speech utterance
+function setTextMessage(text) {
+   message.text = text;
+}
+
+// Speak text
+function speakText() {
+   speechSynthesis.speak(message);
+}
+
+
+// EVENT LISTENERS ////////////////////
 
 // Voices changed
 // "voiceschanged" event is not compatible with Safari iOS
@@ -108,3 +120,6 @@ closeBtn.addEventListener('click', () => document.getElementById('text-box').cla
 
 // Init voices
 createVoicesList();
+
+// Init speech synth
+const message = new SpeechSynthesisUtterance();
