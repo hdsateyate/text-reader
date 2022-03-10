@@ -84,7 +84,7 @@ function createVoicesList() {
 	voices.forEach(voice => {
 		console.log(voice);
 		
-		const option = createElement('option');
+		const option = document.createElement('option');
 
 		option.value = voice.name;
 		option.innerText = `${voice.name} ${voice.lang}`;
