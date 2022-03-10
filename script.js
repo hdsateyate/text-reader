@@ -77,12 +77,16 @@ function createBoxes(item) {
 let voices = [];
 
 function createVoicesList() {
-	voices = speechSynthesis.getVoices();
-	
 	console.log(voices);
+
+	voices = speechSynthesis.getVoices();
+
+	let consLog = setTimeout(console.log(voices), 6000);
+
+   consLog = setTimeout(console.log(voices), 10000);
 	
 	voices.forEach(voice => {
-		console.log(voice);
+		// console.log(voice);
 		
 		const option = document.createElement('option');
 
@@ -91,8 +95,6 @@ function createVoicesList() {
 		voicesSelect.appendChild(option);
 	});
 }
-
-console.log(speechSynthesis);
 
 // Voices changed
 // "voiceschanged" event is not compatible with Safari iOS
