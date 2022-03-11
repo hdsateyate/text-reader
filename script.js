@@ -5,6 +5,11 @@ const readBtn = document.getElementById('read');
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
 
+// Create new speech synth utterance
+function newSpeechSynthUtterance() {
+   return message = new SpeechSynthesisUtterance();
+}
+
 const data = [
    {
       image: './img/drink.jpg',
@@ -69,8 +74,7 @@ function createBoxes(item) {
       <p class="info">${text}</p>`;
 
    box.addEventListener('click', () => {
-      setTextMessage(text);
-      speakText();
+      speakText(text);
 
       // Add active effect
       box.classList.add('active');
@@ -95,20 +99,10 @@ function createVoicesList() {
 	});
 }
 
-// Set the text for the speech utterance
-function setTextMessage(text) {
-   message.text = text;
-}
-
 // Speak text
-function speakText() {
+function speakText(text) {
+   message.text = text;
    speechSynthesis.speak(message);
-}
-
-// Speak custom text
-function readCustomText() {
-   setTextMessage(textarea.value);
-   speakText();
 }
 
 // Set voice
@@ -130,13 +124,13 @@ toggleBtn.addEventListener('click', () => document.getElementById('text-box').cl
 closeBtn.addEventListener('click', () => document.getElementById('text-box').classList.remove('show'));
 
 // Read box button
-readBtn.addEventListener('click', readCustomText);
+readBtn.addEventListener('click', () => {
+   speakText(textarea.value);
+});
 
 // change voice
 voicesSelect.addEventListener('change', setVoice);
 
-// Init voices
+// Init voices and speech synth
 createVoicesList();
-
-// Init speech synth
-const message = new SpeechSynthesisUtterance();
+newSpeechSynthUtterance();
